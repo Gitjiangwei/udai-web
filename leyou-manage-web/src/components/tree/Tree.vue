@@ -1,16 +1,16 @@
 <template>
   <v-list class="pt-0 pb-0" dense>
-    <TreeItem
-      class="item" :model="model" v-for="(model, index) in db" :key="index"
-      :url="url"
-      :isEdit="isEdit"
-      :nodes="nodes"
-      @handleAdd="handleAdd"
-      @handleEdit="handleEdit"
-      @handleDelete="handleDelete"
-      @handleClick="handleClick"
-    />
-  </v-list>
+  <TreeItem
+    class="item" :model="model" v-for="(model, index) in db" :key="index"
+    :url="url"
+    :isEdit="isEdit"
+    :nodes="nodes"
+    @handleAdd="handleAdd"
+    @handleEdit="handleEdit"
+    @handleDelete="handleDelete"
+    @handleClick="handleClick"
+  />
+</v-list>
 </template>
 
 <script>
