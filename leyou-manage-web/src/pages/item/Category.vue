@@ -2,6 +2,7 @@
   <v-card>
       <v-flex xs12 sm10>
         <v-tree url="udai-item/qryList?userToken=1"
+                :treeData = "treeData"
                 :isEdit="isEdit"
                 @handleAdd="handleAdd"
                 @handleEdit="handleEdit"

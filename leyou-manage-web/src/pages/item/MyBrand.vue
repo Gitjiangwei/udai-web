@@ -3,7 +3,28 @@
 
     <!--卡片的头部-->
     <v-card-title>
-      <v-btn depressed  color="primary">新增品牌</v-btn>
+        <v-btn depressed dark @click="addBrand" color="primary">新增品牌</v-btn>
+      <v-row justify="center">
+        <!--弹出对话框-->
+        <v-dialog max-width="600" v-model="show" persistent>
+          <v-card>
+            <v-toolbar dense dark color="primary">
+              <v-toolbar-title>新增品牌</v-toolbar-title>
+              <v-spacer/>
+              <v-btn icon text @click="show = false" ><v-icon>close</v-icon></v-btn>
+            </v-toolbar>
+
+              <v-card-text>
+                <my-brand-form/>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="show = false">Close</v-btn>
+                <v-btn color="blue darken-1" text @click="show = false">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+        </v-dialog>
+      </v-row>
       <v-spacer />
 
       <v-text-field label="输入关键字搜索"   hide-details="false"  append-icon="search" v-model.lazy="search"  ></v-text-field>
@@ -41,9 +62,10 @@
 
 <script>
     import VSpec from "./specification/Specification";
+    import MyBrandForm from "./MyBrandForm";
     export default {
-        name: "MyBrand",
-      components: {VSpec},
+      name: "MyBrand",
+      components: {VSpec,MyBrandForm},
       data(){
           return{
             headers:[
@@ -58,6 +80,7 @@
             totalDesserts:0,
             loading: true, //是否在加载中
             search: '', //搜索过滤字段
+            show: false,
           }
       },
 
@@ -98,7 +121,11 @@
 
       },
       methods:{
+        addBrand(){ //新增品牌
+          this.show = true;
+        },
         loadBrands: function () {
+          alert(this.pagination.page);
           this.$http.get("udai-item/qryBrand?userToken=1", {
             params: {
               name: this.search,
@@ -106,10 +133,10 @@
               rows: this.pagination.rowsPerPage, //每页长度
               sortBy: this.pagination.sortBy, //是否排序
               desc: this.pagination.descending, // 是否降序
-
             }
+
           }).then( resp =>{ //这里使用箭头函数
-                this.desserts = resp.data;
+                this.desserts = resp.data.items;
                 this.totalDesserts = resp.data.total;
                 //完成赋值后，把加载状态赋值为false
                 this.loading = false;
