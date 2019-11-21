@@ -4,7 +4,6 @@
       <v-row>
         <v-col cols="12" sm="6" md="4">
           <v-text-field label="请输入品牌名称" v-model="brand.name" required></v-text-field>
-
       </v-col>
         <v-col cols="12" sm="6" md="4">
           <v-text-field label="请输入品牌首字母" v-model="brand.letter" required></v-text-field>
