@@ -3,7 +3,7 @@
     <v-list-tile
       @click="toggle" class="level1 py-0 my-0" :class="{'selected':isSelected}">
       <v-list-tile-avatar class="px-1">
-        <v-icon v-if="model.isParent">{{open ? 'folder_open' : 'folder'}}</v-icon>
+        <v-icon id="icon" v-if="xuanze">{{open ? 'folder_open' : 'folder'}}</v-icon>
         <v-icon v-if="!model.isParent">insert_drive_file</v-icon>
       </v-list-tile-avatar>
       <v-list-tile-content>
@@ -30,7 +30,7 @@
       </v-list-tile-action>
     </v-list-tile>
 
-    <v-list v-if="isFolder" v-show="open" class="ml-4 pt-0 pb-0" dense transition="scale-transition">
+    <v-list v-if="isFolder"  v-show="open" class="ml-4 pt-0 pb-0" dense transition="scale-transition">
       <tree-item
         class="item"
         v-for="(model, index) in model.children"
@@ -84,11 +84,20 @@
         }
       }
     },
+
     computed: {
       isFolder: function () {
         return this.model.children &&
           this.model.children.length > 0
-      }
+      },
+      xuanze:function(){
+        if(this.model.isParent==0){
+          return  this.model.isParent=false;
+        }
+        if(this.model.isParent==1){
+          return  this.model.isParent=true;
+        }
+      },
     },
     methods: {
       toggle: function () {
