@@ -17,11 +17,6 @@
               <v-card-text>
                 <my-brand-form/>
               </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="show = false">Close</v-btn>
-                <v-btn color="blue darken-1" text @click="show = false">Save</v-btn>
-              </v-card-actions>
             </v-card>
         </v-dialog>
       </v-row>
@@ -125,7 +120,6 @@
           this.show = true;
         },
         loadBrands: function () {
-          alert(this.pagination.page);
           this.$http.get("udai-item/qryBrand?userToken=1", {
             params: {
               name: this.search,
